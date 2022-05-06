@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('products', 'App\Http\Controllers\ProductController');//->middleware('auth');
+use App\Http\Controllers\{
+    PostController
+};
+
+//Route::resource('products', 'App\Http\Controllers\ProductController');//->middleware('auth');
+
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 /*
 Route::delete('products/{id}', 'App\Http\Controllers\Products@destroy')->name('products.destroy');
